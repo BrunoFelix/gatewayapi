@@ -19,9 +19,10 @@ public class UserService {
 	
 	public User create(String name) throws RestException {	
 		String apiKey = new String(Base64.getEncoder().encodeToString(("apigateway" + name).getBytes()));
-		User user = userRep.findById(apiKey).get();
+		User user = userRep.findById(apiKey).orElse(null);
 		
-		if (user != null && user.getApiKey().isEmpty()) {
+		if (user == null) {
+			user = new User();
 			user.setName(name);
 			user.setApiKey(apiKey);
 			Date data = new Date(System.currentTimeMillis()); 
