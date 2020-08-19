@@ -27,19 +27,19 @@ public class DataController {
 	private DataService dataService;
 	
 	@GetMapping(value = "/country")
-	public ResponseEntity<Country> getCountry (@RequestParam(value = "api_key", required = true) String apiKey) throws RestException{
+	public ResponseEntity<Country> getCountry (@RequestParam(value = "apiKey", required = true) String apiKey) throws RestException{
 		Country country = dataService.getCountry(apiKey);
 		return ResponseEntity.status(HttpStatus.OK).body(country);
 	}
 	
 	@GetMapping(value = "/state")
-	public ResponseEntity<List<State>> getState (@RequestParam(value = "api_key", required = true) String apiKey, @RequestParam(value = "id_state", required = false) String idState) throws RestException{
+	public ResponseEntity<List<State>> getState (@RequestParam(value = "apiKey", required = true) String apiKey, @RequestParam(value = "idState", required = false) String idState) throws RestException{
 		List<State> states= dataService.getState(apiKey, idState);
 		return ResponseEntity.status(HttpStatus.OK).body(states);
 	}	
 	
 	@GetMapping(value = "/region")
-	public ResponseEntity<List<Region>> getRegion (@RequestParam(value = "api_key", required = true) String apiKey, @RequestParam(value = "id_region", required = false) String idRegion) throws RestException{
+	public ResponseEntity<List<Region>> getRegion (@RequestParam(value = "apiKey", required = true) String apiKey, @RequestParam(value = "idRegion", required = false) String idRegion) throws RestException{
 		List<Region> regions = dataService.getRegion(apiKey, idRegion);
 		return ResponseEntity.status(HttpStatus.OK).body(regions);
 	}	

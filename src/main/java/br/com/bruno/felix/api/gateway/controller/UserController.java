@@ -16,12 +16,12 @@ import br.com.bruno.felix.api.gateway.service.UserService;
 @RequestMapping(value="/api/user")
 public class UserController {
 
-	@Autowired
+	@Autowired(required=true)
 	private UserService userService;
 	
 	@PostMapping("/create")
 	public ResponseEntity<User> create (@RequestBody String name) throws RestException{
 		User user = userService.create(name);
-		return ResponseEntity.status(HttpStatus.OK).body(user);
+		return ResponseEntity.status(HttpStatus.CREATED).body(user);
 	}
 }

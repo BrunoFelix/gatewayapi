@@ -70,6 +70,12 @@ git clone https://github.com/BrunoFelix/gatewayapi.git
 
 * Acessar pasta do projeto clonado e executar o seguinte comando:
 
+```git
+mvn install
+```
+
+* O arquivo JAR executável agora está disponível no diretório target e podemos iniciar o aplicativo executando o seguinte comando na linha de comando:
+
 ```java
 java -jar target/gatewayapi-0.0.1-SNAPSHOT.jar
 ```
