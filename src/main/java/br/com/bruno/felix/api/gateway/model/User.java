@@ -20,6 +20,16 @@ public class User {
 	
 	@Column(name = "create_at")
 	private Date createAt;
+	
+	public User() {
+		
+	}
+	
+	public User(String apiKey, String name, Date createAt) {
+		this.apiKey = apiKey;
+		this.name = name;
+		this.createAt = createAt;
+	}
 
 	/**
 	 * Getters and Setters
