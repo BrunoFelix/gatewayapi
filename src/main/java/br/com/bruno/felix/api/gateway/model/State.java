@@ -1,11 +1,17 @@
 package br.com.bruno.felix.api.gateway.model;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class State {
+public class State implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@JsonProperty("_id")
 	public String id;
 	@JsonProperty("nome")
