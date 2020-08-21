@@ -5,25 +5,28 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Date;
+
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import br.com.bruno.felix.api.gateway.controller.UserController;
 import br.com.bruno.felix.api.gateway.model.User;
+import br.com.bruno.felix.api.gateway.service.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -37,26 +40,48 @@ public class UserControllerTest {
 	private WebApplicationContext wac;
 
 	@MockBean
-	private UserController userController;
+	private UserService userService;
 	
-	private User pms;
+	private User user;
+	private User _user;
+
 		
 	@Before
 	public void setup() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
+		mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
 	}
 	
 	@Test
 	public void testInsert() throws Exception {
-		pms = new User(null, "Portal do Ministério da Saúde", null);
+		this.user = new User(null, "Portal do Ministério da Saúde", null);
+		this._user = new User("YXBpZ2F0ZXdheVBvcnRhbCBkbyBNaW5pc3TDqXJpbyBkYSBTYcO6ZGU=", "Portal do Ministério da Saúde", new Date(System.currentTimeMillis()));
 		
-		Gson gson = new GsonBuilder().create();
-		
-		ResultActions response = this.mockMvc
-				.perform(post("/api/user/create/").contentType(MediaType.APPLICATION_JSON).content(gson.toJson(pms)));
-		
-		response.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
-		.andExpect(jsonPath("apiKey").exists());
+		Mockito.when(userService.create(Mockito.any(String.class))).thenReturn(this._user);
+		mockMvc.perform(post("/api/user")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(new JSONObject(this.user).toString())
+			.characterEncoding("UTF-8")
+			.accept(MediaType.APPLICATION_JSON))
+			.andExpect(status().isCreated())
+			.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+			.andExpect(jsonPath("$.apiKey").value(this._user.getApiKey()))
+			.andExpect(jsonPath("$.name").value(this._user.getName()));
 	}
+	
+	@Test
+	public void testInsertServiceNotFound() throws Exception {	
+		this.user = new User(null, "Portal do Ministério da Saúde", null);
+		this._user = new User("YXBpZ2F0ZXdheVBvcnRhbCBkbyBNaW5pc3TDqXJpbyBkYSBTYcO6ZGU=", "Portal do Ministério da Saúde", new Date(System.currentTimeMillis()));
+		
+		Mockito.when(userService.create(Mockito.any(String.class))).thenReturn(this._user);
+		mockMvc.perform(post("/api/user/test")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(new JSONObject(this.user).toString())
+			.characterEncoding("UTF-8")
+			.accept(MediaType.APPLICATION_JSON))
+			.andExpect(status().isNotFound());
+	}
+	
+	
 	
 }

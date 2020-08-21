@@ -19,7 +19,7 @@ public class UserController {
 	@Autowired(required=true)
 	private UserService userService;
 	
-	@PostMapping("/create")
+	@PostMapping
 	public ResponseEntity<User> create (@RequestBody String name) throws RestException{
 		User user = userService.create(name);
 		return ResponseEntity.status(HttpStatus.CREATED).body(user);

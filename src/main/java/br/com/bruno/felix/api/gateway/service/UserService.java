@@ -2,7 +2,6 @@ package br.com.bruno.felix.api.gateway.service;
 
 import java.util.Base64;
 import java.util.Date;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +23,8 @@ public class UserService {
 		if (user == null) {
 			user = new User();
 			user.setName(name);
-			user.setApiKey(apiKey);
-			Date data = new Date(System.currentTimeMillis()); 
-			user.setCreateAt(data);
+			user.setApiKey(apiKey); 
+			user.setCreateAt(new Date(System.currentTimeMillis()));
 			user = userRep.save(user);
 		}
 		

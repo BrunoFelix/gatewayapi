@@ -1,0 +1,21 @@
+{
+   "confirmados":{
+      "total":"3501975",
+      "titulo":"Casos",
+      "novos":45323,
+      "incidencia":"1666,4",
+      "recuperados":"2653407",
+      "acompanhamento":"736264",
+      "percent":""
+   },
+   "obitos":{
+      "total":"112304",
+      "titulo":"Obitos",
+      "novos":1204,
+      "incidencia":"",
+      "letalidade":"3,2",
+      "mortalidade":"53,4",
+      "percent":""
+   },
+   "dt_updated":"2020-08-21T14:10:55.396Z"
+}
