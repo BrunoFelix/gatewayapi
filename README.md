@@ -26,7 +26,7 @@ O projeto foi criado e desenvolvido seguindo a estrutura descrita abaixo:
 │   └── main
 │       └── java
 │           ├── br.com.bruno.felix.api.gateway.controller
-│			      ├── br.com.bruno.felix.api.gateway.exception
+│	├── br.com.bruno.felix.api.gateway.exception
 │           ├── br.com.bruno.felix.api.gateway.model
 │           ├── br.com.bruno.felix.api.gateway.repository
 │           ├── br.com.bruno.felix.api.gateway.service
