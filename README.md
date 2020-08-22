@@ -26,7 +26,7 @@ O projeto foi criado e desenvolvido seguindo a estrutura descrita abaixo:
 │   └── main
 │       └── java
 │           ├── br.com.bruno.felix.api.gateway.controller
-│			├── br.com.bruno.felix.api.gateway.exception
+│			      ├── br.com.bruno.felix.api.gateway.exception
 │           ├── br.com.bruno.felix.api.gateway.model
 │           ├── br.com.bruno.felix.api.gateway.repository
 │           ├── br.com.bruno.felix.api.gateway.service
@@ -37,7 +37,10 @@ O projeto foi criado e desenvolvido seguindo a estrutura descrita abaixo:
 ├── src
 │   └── test
 │       └── java
-│			├── br.com.bruno.felix.api.gateway
+            ├── br.com.bruno.felix.api.gateway.unit
+                ├── br.com.bruno.felix.api.gateway.unit.controller
+                ├── br.com.bruno.felix.api.gateway.unit.service
+        └── Resources
 ├── JRE System Library
 ├── Maven Dependencies
 ├── src
@@ -52,7 +55,7 @@ O projeto foi criado e desenvolvido seguindo a estrutura descrita abaixo:
 
 * 	[API]
 - `controller` - Pasta responsável pelo mapeamento e direcionamento das ações recebidas (request) pela camada da apresentação para os respectivos serviços da aplicação.
-- `model` - Pasta responsável pelo armazenamento de classes que tratam as exceções;
+- `exception` - Pasta responsável pelo armazenamento de classes que tratam as exceções;
 - `model` - Pasta responsável pelo armazenamento de classes básicas e de respostas (response);
 - `repository` - Pasta responsável pelo armazenamento de arquivos que realizam consultas na base de dados;
 - `service` - Pasta responsável pelo armazenamento dos arquivos que detalham os serviços da aplicação consumindo os arquivos as pasta repository;
